@@ -1,0 +1,2 @@
+azure-cosmos==4.7.0
+openai
