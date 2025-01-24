@@ -16,27 +16,25 @@ You will need:
 
 ## Configure Integrated Vector Database in Azure Cosmos DB for NoSQL
 
-**Enable the feature**
+Before you start loading data, make sure to configure the vector database in Azure Cosmos DB.
+
+### Enable the feature
 
 This is a one-time operation - you will need to explicitly [enable the vector indexing and search feature](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/vector-search).
 
 ![](images/enable.png)
 
-**Create database and container**
+### Create database and container
 
 Once you have done that, go ahead and create a database and collection. I created a database named `movies_db` and a container named `movies` with the partition key set to `/id`.
 
-**Create policies**
+### Create policies
 
-You will need to configure a vector embedding policy as well as an indexing policy for the container. For now, you can do it manually via the Azure portal (it's possible to do it programmatically as well) as part of the collection creation process:
+You will need to configure a vector embedding policy as well as an indexing policy for the container. For now, you can do it manually via the Azure portal (it's possible to do it programmatically as well) as part of the collection creation process. Use the same policy information as per the above, at least for this sample app:
 
 ![](images/container.png)
 
-> Make sure you use the same policy information as per the image above, at least for this sample app.
-
-**Choice of index type**
-
-Note that I have chosen the `diskANN` index type which and a dimension of `1536` for the vector embeddings. The embedding model I chose was [text-embedding-ada-002 model and it supports dimension size of 1536](https://learn.microsoft.com/en-us/azure/search/cognitive-search-skill-azure-openai-embedding#supported-dimensions-by-modelname). I would recommend that you stick to these values for running this sample app. But know that you can [change the index type](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/vector-search#vector-indexing-policies) but will need to change the embedding model to match the new dimension of the specified index type.
+> **Choice of index type**: Note that I have chosen the `diskANN` index type which and a dimension of `1536` for the vector embeddings. The embedding model I chose was [text-embedding-ada-002 model and it supports dimension size of 1536](https://learn.microsoft.com/en-us/azure/search/cognitive-search-skill-azure-openai-embedding#supported-dimensions-by-modelname). I would recommend that you stick to these values for running this sample app. But know that you can [change the index type](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/vector-search#vector-indexing-policies) but will need to change the embedding model to match the new dimension of the specified index type.
 
 Alright, lets move on.
 
